@@ -67,7 +67,7 @@ myManageHook = composeAll
     , stringProperty "WM_WINDOW_ROLE" =? "browser" --> doShift "2:web"
     , className =? "Uzbl-core"   --> doShift "2:web"
     , title =? "Gnus"     --> doShift "9:email"
---    , (className =? "Emacs" <&&> className /=? "Gnus") --> doShift "3:dev"
+    , title =? "Mu4e"     --> doShift "9:email"
     , className =? "Rhythmbox" --> doShift "5:music"
     , className =? "Amarok"    --> doShift "5:music"
     , className =? "Banshee"   --> doShift "5:music"
@@ -225,8 +225,8 @@ myKeys =
         , ("M-S-b",       spawn "gnome-www-browser" )
         , ("M-S-e",       spawn "e" )
         , ("M-S-g",       spawn "gnus" )
+        , ("M-S-m",       spawn "mu4e" )
         , ("M-S-r",       spawn "emacsclient -n -e '(make-remember-frame)'" )
-        , ("M-S-m",       spawn "emacs" )
         , ("M-S-n",       spawn "nautilus --no-desktop ~/" )
         , ("M-S-u",       spawn "uzbl-browser" )
         , ("M-S-c",       spawn "chromium" )
