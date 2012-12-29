@@ -1,0 +1,35 @@
+#!/bin/sh
+export PATH=${HOME}/local/bin:$PATH
+export BONOBO_ACTIVATION_PATH=${HOME}/local/lib/bonobo/servers
+#export GDK_NATIVE_WINDOWS=true
+export TERM=xterm
+export GNOME_DESKTOP_SESSION_ID=fake
+export MAILDIR=${HOME}/.Mail
+
+eval $(gnome-keyring-daemon --start)
+export GNOME_KEYRING_CONTROL
+export SSH_AUTH_SOCK
+export GPG_AGENT_INFO
+export GNOME_KEYRING_PID
+
+mkdir -p $HOME/.keychain
+host=$(uname -n)
+echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK; export SSH_AUTH_SOCK;" > $HOME/.keychain/${host}-sh
+echo "GPG_AGENT_INFO=$GPG_AGENT_INFO; export GPG_AGENT_INFO;" > $HOME/.keychain/${host}-sh-gpg
+
+xcompmgr -s -cCfF -D6 -t0 -l0 -r0 -o0 &
+
+gnome-screensaver &
+
+(sleep 0 && bmpanel2) &
+
+# (sleep 0 && system-config-printer-applet) &
+(sleep 0 && bluetooth-applet) &
+(sleep 0 && gnome-sound-applet) &
+(sleep 2 && keepass) &
+
+# Conky
+# conky -c ~/.conky/conky_orange/conkyrc_orange &
+# conky -c ~/.conky/meteo/conkyrc_en &
+
+exec gnome-session --session xmonad-gnome-nopanel "$@"

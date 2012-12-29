@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ "$1" == "current" ]; then
+  window_ids=`xprop -root | grep "^_NET_ACTIVE_WINDOW" | sed -e "s/.*\(0x[0-9]*\)/\1/"`
+else
+  window_ids=`xwininfo -root -tree | grep -v "has no name" | grep "^     0x" | cut -d' ' -f 6`
+fi
+
+for id in $window_ids; do
+  echo "Toggle transparency of window $id"
+  transset-df -t --id $id 0.1
+done

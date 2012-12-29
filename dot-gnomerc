@@ -1,0 +1,8 @@
+export PATH=${HOME}/local/bin:$PATH
+export BONOBO_ACTIVATION_PATH=${HOME}/local/lib/bonobo/servers
+export GDK_NATIVE_WINDOWS=true
+
+host=$(uname -n)
+[ -f $HOME/.keychain/${host}-sh ] && . $HOME/.keychain/${host}-sh
+[ -f $HOME/.keychain/${host}-sh-gpg ] && . $HOME/.keychain/${host}-sh-gpg
+/usr/bin/keychain $HOME/.ssh/id_dsa --inherit any &
